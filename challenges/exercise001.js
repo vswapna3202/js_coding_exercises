@@ -52,13 +52,24 @@ export function getSalePrice(originalPrice, reduction) {
 }
 
 export function getMiddleCharacter(str) {
-	if (str === undefined) throw new Error('str is required');
-	// Add your code here!
+	if (str === undefined || str == "") throw new Error('str is required');
+	if (typeof str != 'string') throw new Error('str should be a string');
+    const length = Math.floor(str.length);
+    const middleIndex = length / 2;
+    if (length % 2 === 0)
+        return str.slice(middleIndex - 1, middleIndex + 1);
+    return str.substring(middleIndex,middleIndex+1);
 }
 
 export function reverseWord(word) {
-	if (word === undefined) throw new Error('word is required');
-	// Add your code here!
+	if (word === undefined || word == "") throw new Error('word is required');
+	if (typeof word != 'string') throw new Error('word should be a string');
+	let reverseString = '';
+	for(let i=word.length - 1; i >=0; i--){
+	    reverseString += word[i];
+	}
+	console.log(reverseString);
+	return reverseString;
 }
 
 export function reverseAllWords(words) {

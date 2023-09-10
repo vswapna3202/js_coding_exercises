@@ -16,6 +16,9 @@ describe("capitalize", () => {
     expect(capitalize("hello")).toBe("Hello");
     expect(capitalize("the quick fox")).toBe("The quick fox");
     expect(capitalize("oh no, bears!!!")).toBe("Oh no, bears!!!");
+    expect(() => capitalize(123)).toThrow("word must be a string");
+    expect(() => capitalize(undefined)).toThrow('word is required');
+    expect(() => capitalize("")).toThrow('word is required');
   });
 
   test("does nothing if the string is already capitalized", () => {

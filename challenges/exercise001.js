@@ -5,8 +5,8 @@
 // Note: Be sure to read the corresponding .md file for each exercise, in the docs folder. 📘 👍
 
 export function capitalize(word) {
-	if (word === undefined) throw new Error('word is required');
-	if (typeof word != 'string') throw new Error('word must be a string');
+	if (word === undefined || word == "") throw new Error('word is required');
+	if (typeof word !== 'string') throw new Error('word must be a string');
 	if(word.charAt(0) !== word.charAt(0).toUpperCase())
 	    return word.charAt(0).toUpperCase() + word.slice(1);
 	else
@@ -16,7 +16,9 @@ export function capitalize(word) {
 export function generateInitials(firstName, lastName) {
 	if (firstName === undefined) throw new Error('firstName is required');
 	if (lastName === undefined) throw new Error('lastName is required');
-	// Add your code here!
+	if (typeof firstName !== 'string') throw new Error('firstName should be a string');
+	if (typeof lastName !== 'string') throw new Error('lastName should be a string');
+	return firstName.charAt(0).toUpperCase()+"."+lastName.charAt(0).toUpperCase();
 }
 
 export function addVAT(originalPrice, vatRate) {

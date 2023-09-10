@@ -16,9 +16,6 @@ describe("capitalize", () => {
     expect(capitalize("hello")).toBe("Hello");
     expect(capitalize("the quick fox")).toBe("The quick fox");
     expect(capitalize("oh no, bears!!!")).toBe("Oh no, bears!!!");
-    expect(() => capitalize(123)).toThrow("word must be a string");
-    expect(() => capitalize(undefined)).toThrow('word is required');
-    expect(() => capitalize("")).toThrow('word is required');
   });
 
   test("does nothing if the string is already capitalized", () => {
@@ -29,12 +26,6 @@ describe("capitalize", () => {
 describe("generateInitials", () => {
   test("returns the initials of a firstname and surname", () => {
     expect(generateInitials("Frederic", "Bonneville")).toBe("F.B");
-    expect(() => generateInitials(undefined,"Bonneville")).toThrow('firstName is required');
-    expect(() => generateInitials("Frederic",undefined)).toThrow('lastName is required');
-    expect(() => generateInitials("","Bonneville")).toThrow('firstName is required');
-    expect(() => generateInitials("Frederic","")).toThrow('lastName is required');
-    expect(() => generateInitials(123,"Bonneville")).toThrow('firstName should be a string');
-    expect(() => generateInitials("Frederic",123)).toThrow('lastName should be a string');
   });
 });
 

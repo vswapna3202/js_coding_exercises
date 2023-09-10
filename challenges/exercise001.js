@@ -80,16 +80,24 @@ export function reverseAllWords(words) {
 }
 
 export function countLinuxUsers(users) {
-	if (users === undefined) throw new Error('users is required');
-	// Add your code here!
+	if (users === undefined || users.length === 0 || !Array.isArray(users)) throw new Error('users is required');
+	const linuxUsers = users.filter(user => user.type === 'Linux');
+	return linuxUsers.length;
 }
 
 export function getMeanScore(scores) {
-	if (scores === undefined) throw new Error('scores is required');
-	// Add your code here!
+	if (scores === undefined || scores.length === 0 || !Array.isArray(scores))
+	    throw new Error('scores is required');
+	const sum = scores.reduce((acc, score) => acc + score, 0);
+	const mean = sum / scores.length;
+	return Math.round(mean * 100) / 100;
 }
 
 export function simpleFizzBuzz(n) {
 	if (n === undefined) throw new Error('n is required');
-	// Add your code here!
+	if (typeof n !== 'number' || isNaN(n)) throw new Error('n needs to be a number')
+	if (n%3 === 0 && n%5 === 0) return "fizzbuzz";
+	else if (n % 3 === 0) return "fizz";
+	else if (n % 5 === 0) return "buzz";
+	else return n;
 }

@@ -14,25 +14,41 @@ export function capitalize(word) {
 }
 
 export function generateInitials(firstName, lastName) {
-	if (firstName === undefined) throw new Error('firstName is required');
-	if (lastName === undefined) throw new Error('lastName is required');
+	if (firstName === undefined || firstName == "")
+	    throw new Error('firstName is required');
+	if (lastName === undefined || lastName == "")
+	    throw new Error('lastName is required');
 	if (typeof firstName !== 'string') throw new Error('firstName should be a string');
 	if (typeof lastName !== 'string') throw new Error('lastName should be a string');
 	return firstName.charAt(0).toUpperCase()+"."+lastName.charAt(0).toUpperCase();
 }
 
 export function addVAT(originalPrice, vatRate) {
-	if (originalPrice === undefined)
-		throw new Error('originalPrice is requied');
+	if (originalPrice === undefined) throw new Error('originalPrice is required');
 	if (vatRate === undefined) throw new Error('vatRate is required');
-	// Add your code here!
+    if (typeof originalPrice !== 'number' || isNaN(originalPrice))
+        throw new Error('Valid numbers must be entered to addVAT')
+    if (typeof vatRate !== 'number' || isNaN(vatRate))
+        throw new Error('Valid numbers must be entered to addVAT')
+	if (originalPrice < 0 || vatRate < 0) throw new Error('Positive numbers are needed to addVAT to originalPrice')
+	let vatAdded = originalPrice + (originalPrice * vatRate / 100);
+	if (vatAdded % 1 !== 0) return parseFloat(vatAdded.toFixed(2));
+	return vatAdded;
 }
 
 export function getSalePrice(originalPrice, reduction) {
 	if (originalPrice === undefined)
 		throw new Error('originalPrice is required');
 	if (reduction === undefined) throw new Error('reduction is required');
-	// Add your code here!
+	if (typeof originalPrice !== 'number' || isNaN(originalPrice))
+	    throw new Error('Valid numbers must be entered to getSalePrice')
+	if (typeof reduction !== 'number' || isNaN(originalPrice))
+    	    throw new Error('Valid numbers must be entered to getSalePrice')
+    if (originalPrice < 0 || reduction < 0)
+        throw new Error('Positive numbers are needed to getSalePrice from originalPrice')
+    let salePrice = originalPrice - (originalPrice * reduction / 100);
+    if (salePrice % 1 !== 0) return parseFloat(salePrice.toFixed(2));
+    return salePrice;
 }
 
 export function getMiddleCharacter(str) {

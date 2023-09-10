@@ -68,13 +68,15 @@ export function reverseWord(word) {
 	for(let i=word.length - 1; i >=0; i--){
 	    reverseString += word[i];
 	}
-	console.log(reverseString);
-	return reverseString;
+    return reverseString;
 }
 
 export function reverseAllWords(words) {
-	if (words === undefined) throw new Error('words is required');
-	// Add your code here!
+	if (words === undefined ||  words.length === 0 || !Array.isArray(words))
+	    throw new Error('words should be a non-empty array');
+	return words.map (word => {
+	    return word.split('').reverse().join('');
+	});
 }
 
 export function countLinuxUsers(users) {

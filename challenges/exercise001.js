@@ -6,7 +6,11 @@
 
 export function capitalize(word) {
 	if (word === undefined) throw new Error('word is required');
-	return word.charAt(0).toUpperCase() + word.slice(1)
+	if (typeof word != 'string') throw new Error('word must be a string');
+	if(word.charAt(0) !== word.charAt(0).toUpperCase())
+	    return word.charAt(0).toUpperCase() + word.slice(1);
+	else
+	    return word;
 }
 
 export function generateInitials(firstName, lastName) {

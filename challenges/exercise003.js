@@ -1,22 +1,44 @@
 export function getSquares(nums) {
 	if (nums === undefined) throw new Error('nums is required');
-	// Your code here!
+	let squares = []
+	for(let i=0;i<nums.length;i++){
+	    squares.push(nums[i] * nums[i]);
+	}
+	return squares;
 }
 
 export function camelCaseWords(words) {
 	if (words === undefined) throw new Error('words is required');
-	// Your code here!
+	let camelCaseWords = "";
+	for (let i = 0; i < words.length; i++){
+	    if( i !== 0)
+	        camelCaseWords = camelCaseWords+words[i].charAt(0).toUpperCase()+words[i].slice(1);
+        else
+	        camelCaseWords = words[i];
+	}
+	return camelCaseWords;
 }
 
 export function getTotalSubjects(people) {
 	if (people === undefined) throw new Error('people is required');
-	// Your code here!
+	let totalSubjects = 0;
+
+	return people.reduce((totalSubjects, person) => {
+	    return totalSubjects + person.subjects.filter(subject => subject !== "").length;
+	    },0);
 }
 
 export function checkIngredients(menu, ingredient) {
 	if (menu === undefined) throw new Error('menu is required');
 	if (!ingredient) throw new Error('ingredient is required');
-	// Your code here!
+
+	for (let i = 0; i < menu.length; i++){
+
+	    if(menu[i].ingredients.includes(ingredient)){
+	        return true;
+	    }
+	}
+	return false;
 }
 
 export function duplicateNumbers(arr1, arr2) {

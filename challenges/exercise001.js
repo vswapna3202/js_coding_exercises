@@ -8,16 +8,16 @@ export function capitalize(word) {
 	if (word === undefined || word == "") throw new Error('word is required');
 	if (typeof word !== 'string') throw new Error('word must be a string');
 	if(word.charAt(0) !== word.charAt(0).toUpperCase())
-	    return word.charAt(0).toUpperCase() + word.slice(1);
+        return word.charAt(0).toUpperCase() + word.slice(1);
 	else
-	    return word;
+        return word;
 }
 
 export function generateInitials(firstName, lastName) {
 	if (firstName === undefined || firstName == "")
-	    throw new Error('firstName is required');
+        throw new Error('firstName is required');
 	if (lastName === undefined || lastName == "")
-	    throw new Error('lastName is required');
+        throw new Error('lastName is required');
 	if (typeof firstName !== 'string') throw new Error('firstName should be a string');
 	if (typeof lastName !== 'string') throw new Error('lastName should be a string');
 	return firstName.charAt(0).toUpperCase()+"."+lastName.charAt(0).toUpperCase();
@@ -41,9 +41,9 @@ export function getSalePrice(originalPrice, reduction) {
 		throw new Error('originalPrice is required');
 	if (reduction === undefined) throw new Error('reduction is required');
 	if (typeof originalPrice !== 'number' || isNaN(originalPrice))
-	    throw new Error('Valid numbers must be entered to getSalePrice')
+        throw new Error('Valid numbers must be entered to getSalePrice')
 	if (typeof reduction !== 'number' || isNaN(originalPrice))
-    	    throw new Error('Valid numbers must be entered to getSalePrice')
+        throw new Error('Valid numbers must be entered to getSalePrice')
     if (originalPrice < 0 || reduction < 0)
         throw new Error('Positive numbers are needed to getSalePrice from originalPrice')
     let salePrice = originalPrice - (originalPrice * reduction / 100);
@@ -66,16 +66,16 @@ export function reverseWord(word) {
 	if (typeof word != 'string') throw new Error('word should be a string');
 	let reverseString = '';
 	for(let i=word.length - 1; i >=0; i--){
-	    reverseString += word[i];
+        reverseString += word[i];
 	}
     return reverseString;
 }
 
 export function reverseAllWords(words) {
 	if (words === undefined ||  words.length === 0 || !Array.isArray(words))
-	    throw new Error('words should be a non-empty array');
+        throw new Error('words should be a non-empty array');
 	return words.map (word => {
-	    return word.split('').reverse().join('');
+        return word.split('').reverse().join('');
 	});
 }
 
@@ -87,7 +87,7 @@ export function countLinuxUsers(users) {
 
 export function getMeanScore(scores) {
 	if (scores === undefined || scores.length === 0 || !Array.isArray(scores))
-	    throw new Error('scores is required');
+        throw new Error('scores is required');
 	const sum = scores.reduce((acc, score) => acc + score, 0);
 	const mean = sum / scores.length;
 	return Math.round(mean * 100) / 100;

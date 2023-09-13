@@ -1,17 +1,30 @@
 export const findNextNumber = (nums, n) => {
 	if (nums === undefined) throw new Error('nums is required');
 	if (n === undefined) throw new Error('n is required');
-	// Your code here!
+	const index = nums.indexOf(n);
+	if (index === -1 || index === nums.length - 1){
+	    return null;
+	}
+	return nums[index+1];
 };
 
 export const count1sand0s = (str) => {
 	if (str === undefined) throw new Error('str is required');
-	// Your code here!
+	if (!/^[01]+$/.test(str)){
+	    throw new Error('number should  have only ones and zeros');
+	}
+	const numberArray = str.split('');
+	const counts = {"0" : 0,"1": 0};
+	for(const bit of str){
+	    counts[bit]++;
+	}
+	return counts;
 };
 
 export const reverseNumber = (n) => {
 	if (n === undefined) throw new Error('n is required');
-	// Your code here!
+	const reverseNumber = n.toString().split('').reverse().join('');
+	return parseInt(reverseNumber);
 };
 
 export const sumArrays = (arrs) => {

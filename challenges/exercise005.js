@@ -3,7 +3,7 @@ export const findNextNumber = (nums, n) => {
 	if (n === undefined) throw new Error('n is required');
 	const index = nums.indexOf(n);
 	if (index === -1 || index === nums.length - 1){
-	    return null;
+        return null;
 	}
 	return nums[index+1];
 };
@@ -11,12 +11,11 @@ export const findNextNumber = (nums, n) => {
 export const count1sand0s = (str) => {
 	if (str === undefined) throw new Error('str is required');
 	if (!/^[01]+$/.test(str)){
-	    throw new Error('number should  have only ones and zeros');
+        throw new Error('number should  have only ones and zeros');
 	}
-	const numberArray = str.split('');
 	const counts = {"0" : 0,"1": 0};
 	for(const bit of str){
-	    counts[bit]++;
+        counts[bit]++;
 	}
 	return counts;
 };
@@ -31,9 +30,9 @@ export const sumArrays = (arrs) => {
 	if (arrs === undefined) throw new Error('arrs is required');
 	let total = 0;
 	for(let i = 0; i < arrs.length; i++){
-	    for(let j = 0; j < arrs[i].length; j++){
-	        total = total + arrs[i][j];
-	    }
+        for(let j = 0; j < arrs[i].length; j++){
+            total = total + arrs[i][j];
+        }
 	}
 	return total;
 };
@@ -50,7 +49,7 @@ export const findNeedle = (haystack, searchTerm) => {
 	if (searchTerm === undefined) throw new Error('searchTerm is required');
 	const values = Object.values(haystack);
 	const ifFound = values.some(item => typeof item === 'string' &&
-	    item.toLowerCase().includes(searchTerm.toLowerCase()));
+        item.toLowerCase().includes(searchTerm.toLowerCase()));
 	return ifFound;
 };
 
@@ -59,12 +58,12 @@ export const getWordFrequencies = (str) => {
 	const strArray = str.split(' ');
 	const frequencies = {};
 	strArray.forEach(word => {
-	    const cleanedWord = word.replace(/[^\w\s]/g, '').toLowerCase();
-	    if(frequencies[cleanedWord]){
-	        frequencies[cleanedWord]++;
-	    }else{
-	        frequencies[cleanedWord]=1;
-	    }
+        const cleanedWord = word.replace(/[^\w\s]/g, '').toLowerCase();
+        if(frequencies[cleanedWord] === undefined){
+            frequencies[cleanedWord] = 1;
+        }else{
+            frequencies[cleanedWord] += 1;
+        }
 	});
 	return frequencies;
 };

@@ -17,11 +17,11 @@ export const sumMultiples = (arr) => {
     }
 	let sum = 0;
 	arr.forEach((num) => {
-	    if (num === undefined || typeof num !== 'number' || isNaN(num))
+        if (num === undefined || typeof num !== 'number' || isNaN(num))
             throw new Error('number is required');
-	    if((num % 3 === 0) || (num%5 === 0)){
-	        sum += num;
-	    }
+        if((num % 3 === 0) || (num%5 === 0)){
+            sum += num;
+        }
 	});
 	return sum;
 };
@@ -43,7 +43,18 @@ export const isValidDNA = (str) => {
  * @returns {String}
  */
 export const getComplementaryDNA = (str) => {
-	if (str === undefined) throw new Error('str is required');
+	if (str === undefined || str.length === 0) throw new Error('str is required');
+	if (!isNaN(str)) throw new Error('str is required with letters CTAG');
+	const complementaryBases = {
+        'A' : 'T','T' : 'A','C' : 'G','G' : 'C'
+	};
+	let complementaryStr = '';
+	for(const char of str){
+        if (complementaryBases[char]){
+            complementaryStr += complementaryBases[char];
+        }
+	}
+	return complementaryStr;
 };
 
 /**
@@ -52,7 +63,7 @@ export const getComplementaryDNA = (str) => {
  * @returns {Boolean}
  */
 export const isItPrime = (n) => {
-	if (n === undefined || n <= 1)
+	if (n === undefined || n <= 1 || isNaN(n) || typeof n !== 'number')
         throw new Error('n is required and should be greater than 1');
 
     for(let i = 2; i <= Math.sqrt(n) ; i++){
@@ -75,8 +86,19 @@ export const isItPrime = (n) => {
  * @returns {Array}
  */
 export const createMatrix = (n, fill) => {
-	if (n === undefined) throw new Error('n is required');
-	if (fill === undefined) throw new Error('fill is required');
+	if (n === undefined || typeof n !== 'number' || isNaN(n) || n < 1)
+        throw new Error('n is required and should be a number > 1');
+	if (fill === undefined || fill.length === 0)
+        throw new Error('fill is required and should be a string');
+	const matrix = [];
+	for(let i=0;i < n; i++){
+        const row = [];
+        for(let j=0;j < n; j++){
+            row.push(fill);
+        }
+        matrix.push(row);
+	}
+	return matrix;
 };
 
 /**
@@ -92,6 +114,21 @@ export const createMatrix = (n, fill) => {
  * @returns {Boolean}
  */
 export const areWeCovered = (staff, day) => {
-	if (staff === undefined) throw new Error('staff is required');
-	if (day === undefined) throw new Error('day is required');
+	if (staff === undefined || staff.length === 0)
+        throw new Error('staff is required');
+	if (day === undefined || typeof day !== 'string' || !isNaN(day))
+        throw new Error('day is required');
+	let staffCount = 0;
+	staff.forEach((staffName => {
+        if (staffName.name === undefined || staffName.name.length === 0)
+            throw new Error('staff is required');
+        if(staffName.rota === undefined || staffName.rota.length === 0)
+            throw new Error('staff rota is not defined');
+        staffName.rota.forEach((rotaSchedule) => {
+            if (rotaSchedule.includes(day)){
+                staffCount ++;
+            }
+        });
+	}));
+	return staffCount >= 3;
 };

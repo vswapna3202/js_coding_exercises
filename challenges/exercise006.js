@@ -56,8 +56,6 @@ export const isItPrime = (n) => {
         throw new Error('n is required and should be greater than 1');
 
     for(let i = 2; i <= Math.sqrt(n) ; i++){
-        console.log("here n"+n);
-        console.log("here i"+i);
         if(n % i === 0){
             return false;
         }

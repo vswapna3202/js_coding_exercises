@@ -29,11 +29,11 @@ export const reverseNumber = (n) => {
 export const sumArrays = (arrs) => {
 	if (arrs === undefined) throw new Error('arrs is required');
 	let total = 0;
-	for(let i = 0; i < arrs.length; i++){
-        for(let j = 0; j < arrs[i].length; j++){
-            total = total + arrs[i][j];
-        }
-	}
+	arrs.forEach((row) => {
+        row.forEach((item) => {
+            total += item;
+        });
+	});
 	return total;
 };
 

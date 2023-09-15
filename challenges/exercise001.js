@@ -5,8 +5,9 @@
 // Note: Be sure to read the corresponding .md file for each exercise, in the docs folder. 📘 👍
 
 export function capitalize(word) {
-	if (word === undefined || word == "") throw new Error('word is required');
-	if (typeof word !== 'string') throw new Error('word must be a string');
+	if (!word || typeof word !== 'string')
+        throw new Error('word is required and must be a string');
+	// If word is not capital then capitalise first word
 	if(word.charAt(0) !== word.charAt(0).toUpperCase())
         return word.charAt(0).toUpperCase() + word.slice(1);
 	else
@@ -14,61 +15,48 @@ export function capitalize(word) {
 }
 
 export function generateInitials(firstName, lastName) {
-	if (firstName === undefined || firstName == "")
-        throw new Error('firstName is required');
-	if (lastName === undefined || lastName == "")
-        throw new Error('lastName is required');
-	if (typeof firstName !== 'string') throw new Error('firstName should be a string');
-	if (typeof lastName !== 'string') throw new Error('lastName should be a string');
-	return firstName.charAt(0).toUpperCase()+"."+lastName.charAt(0).toUpperCase();
+	if (!firstName || typeof firstName !== 'string')
+        throw new Error('firstName is required and must be a string');
+	if (!lastName || typeof lastName !== 'string')
+        throw new Error('lastName is required and must be a string');
+	return `${firstName.charAt(0).toUpperCase()}.${lastName.charAt(0).toUpperCase()}`;
 }
 
 export function addVAT(originalPrice, vatRate) {
-	if (originalPrice === undefined) throw new Error('originalPrice is required');
-	if (vatRate === undefined) throw new Error('vatRate is required');
-    if (typeof originalPrice !== 'number' || isNaN(originalPrice))
-        throw new Error('Valid numbers must be entered to addVAT')
-    if (typeof vatRate !== 'number' || isNaN(vatRate))
-        throw new Error('Valid numbers must be entered to addVAT')
-	if (originalPrice < 0 || vatRate < 0) throw new Error('Positive numbers are needed to addVAT to originalPrice')
+	if (originalPrice === undefined || typeof originalPrice !== 'number'
+        || isNaN(originalPrice) || originalPrice < 0)
+        throw new Error('originalPrice is required and should be a valid number'
+        +'greater than 0');
+	if (vatRate === undefined || typeof vatRate !== 'number' || isNaN(vatRate) || vatRate < 0)
+        throw new Error('vatRate is required and should be a valid number greater than 0');
 	let vatAdded = originalPrice + (originalPrice * vatRate / 100);
-	if (vatAdded % 1 !== 0) return parseFloat(vatAdded.toFixed(2));
-	return vatAdded;
+	return Math.abs(vatAdded % 1) !== 0 ? parseFloat(vatAdded.toFixed(2)) : vatAdded;
 }
 
 export function getSalePrice(originalPrice, reduction) {
-	if (originalPrice === undefined)
-		throw new Error('originalPrice is required');
-	if (reduction === undefined) throw new Error('reduction is required');
-	if (typeof originalPrice !== 'number' || isNaN(originalPrice))
-        throw new Error('Valid numbers must be entered to getSalePrice')
-	if (typeof reduction !== 'number' || isNaN(originalPrice))
-        throw new Error('Valid numbers must be entered to getSalePrice')
-    if (originalPrice < 0 || reduction < 0)
-        throw new Error('Positive numbers are needed to getSalePrice from originalPrice')
+	if (originalPrice === undefined || typeof originalPrice !== 'number'
+        || isNaN(originalPrice) || originalPrice < 0)
+		throw new Error('originalPrice is required and must be a positive number');
+	if (reduction === undefined || typeof reduction !== 'number' || isNaN(reduction) || reduction < 0)
+        throw new Error('reduction is required and must be a positive number');
     let salePrice = originalPrice - (originalPrice * reduction / 100);
-    if (salePrice % 1 !== 0) return parseFloat(salePrice.toFixed(2));
-    return salePrice;
+    return Math.abs(salePrice % 1) !== 0 ? parseFloat(salePrice.toFixed(2)) : salePrice;
 }
 
 export function getMiddleCharacter(str) {
-	if (str === undefined || str == "") throw new Error('str is required');
-	if (typeof str != 'string') throw new Error('str should be a string');
-    const length = Math.floor(str.length);
-    const middleIndex = length / 2;
-    if (length % 2 === 0)
+	if (!str || typeof str != 'string')
+        throw new Error('str is required and must be a string');
+
+    const middleIndex = str.length / 2;
+    if (str.length % 2 === 0)
         return str.slice(middleIndex - 1, middleIndex + 1);
     return str.substring(middleIndex,middleIndex+1);
 }
 
 export function reverseWord(word) {
-	if (word === undefined || word == "") throw new Error('word is required');
-	if (typeof word != 'string') throw new Error('word should be a string');
-	let reverseString = '';
-	for(let i=word.length - 1; i >=0; i--){
-        reverseString += word[i];
-	}
-    return reverseString;
+	if (!word || typeof word != 'string')
+        throw new Error('word is required and should be a string');
+	return word.split('').reverse().join('');
 }
 
 export function reverseAllWords(words) {
@@ -80,7 +68,8 @@ export function reverseAllWords(words) {
 }
 
 export function countLinuxUsers(users) {
-	if (users === undefined || users.length === 0 || !Array.isArray(users)) throw new Error('users is required');
+	if (users === undefined || users.length === 0 || !Array.isArray(users))
+        throw new Error('users is required');
 	const linuxUsers = users.filter(user => user.type === 'Linux');
 	return linuxUsers.length;
 }
@@ -94,8 +83,8 @@ export function getMeanScore(scores) {
 }
 
 export function simpleFizzBuzz(n) {
-	if (n === undefined) throw new Error('n is required');
-	if (typeof n !== 'number' || isNaN(n)) throw new Error('n needs to be a number')
+	if (n === undefined || typeof n !== 'number' || isNaN(n))
+        throw new Error('n is required and must be a number');
 	if (n%3 === 0 && n%5 === 0) return "fizzbuzz";
 	else if (n % 3 === 0) return "fizz";
 	else if (n % 5 === 0) return "buzz";

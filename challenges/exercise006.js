@@ -12,6 +12,9 @@
  */
 export const sumMultiples = (arr) => {
 	if (arr === undefined || arr.length === 0) throw new Error('arr is required');
+	if (!Array.isArray(arr)) {
+        throw new Error('arr should be an array');
+    }
 	let sum = 0;
 	arr.forEach((num) => {
 	    if (num === undefined || typeof num !== 'number' || isNaN(num))
@@ -29,7 +32,9 @@ export const sumMultiples = (arr) => {
  * @returns {Boolean}
  */
 export const isValidDNA = (str) => {
-	if (str === undefined) throw new Error('str is required');
+	if (str === undefined || str.length === 0) throw new Error('str is required');
+	const regEx = /[CGTA]/;
+	return regEx.test(str);
 };
 
 /**
@@ -47,7 +52,17 @@ export const getComplementaryDNA = (str) => {
  * @returns {Boolean}
  */
 export const isItPrime = (n) => {
-	if (n === undefined) throw new Error('n is required');
+	if (n === undefined || n <= 1)
+        throw new Error('n is required and should be greater than 1');
+
+    for(let i = 2; i <= Math.sqrt(n) ; i++){
+        console.log("here n"+n);
+        console.log("here i"+i);
+        if(n % i === 0){
+            return false;
+        }
+    }
+    return true;
 };
 
 /**

@@ -1,5 +1,7 @@
 import {
     sumMultiples,
+    isValidDNA,
+    isItPrime,
 } from "../challenges/exercise006";
 
 describe("sumMultiples", () => {
@@ -23,5 +25,41 @@ describe("sumMultiples", () => {
     });
     test("throws an error for empty array", () => {
         expect(() => sumMultiples([])).toThrow();
+    });
+    test("throws an error for a non array", () => {
+        expect(() => sumMultiples("1,2,3")).toThrow();
+    });
+});
+
+describe("isValidDNA", () => {
+    test("returns if entered string has only C,G,T,A characters",() => {
+        expect(isValidDNA("CGTACGTACGTA")).toBe(true);
+    });
+    test("returns false if characters other than C,G,T,A are entered", () => {
+        expect(isValidDNA("bdefbdef")).toBe(false);
+    });
+    test("returns error when String is empty",() =>
+        { expect(() => isValidDNA("")).toThrow();
+    });
+    test("returns error when string is undefined",() => {
+        expect(() => isValidDNA(undefined)).toThrow();
+    });
+    test("returns false when string has numbers",() => {
+        expect(isValidDNA(1234)).toBe(false);
+    });
+});
+
+describe("isItPrime", () => {
+    test("returns true if prime number", () => {
+        expect(isItPrime(17)).toBe(true);
+    });
+    test("returns false if not prime number", () => {
+        expect(isItPrime(10)).toBe(false);
+    });
+    test("throws error if number less than or equal to 1", () => {
+        expect(() => isItPrime(1)).toThrow();
+    });
+    test("throws an error for undefined array", () => {
+        expect(() => isItPrime(undefined)).toThrow();
     });
 });

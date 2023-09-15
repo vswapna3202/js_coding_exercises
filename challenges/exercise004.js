@@ -33,7 +33,12 @@ export function getIntegers(nums) {
 
 export function getCities(users) {
 	if (!users) throw new Error('users is required');
-	const cityArray = users.filter(user => user.data && user.data.city && user.data.city.displayName).map(user => user.data.city.displayName);
+	const cityArray = [];
+	users.forEach(user => {
+        if (user.data && user.data.city && user.data.city.displayName){
+            cityArray.push(user.data.city.displayName);
+        }
+	});
 	return cityArray;
 }
 
@@ -60,5 +65,4 @@ export function getLongestSides(triangles) {
 	if (!triangles) throw new Error('triangles is required');
 	const longestSide = triangles.map(triangle => Math.max(...triangle));
 	return longestSide;
-
 }

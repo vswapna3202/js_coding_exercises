@@ -28,12 +28,9 @@ export const reverseNumber = (n) => {
 
 export const sumArrays = (arrs) => {
 	if (arrs === undefined) throw new Error('arrs is required');
-	let total = 0;
-	arrs.forEach((row) => {
-        row.forEach((item) => {
-            total += item;
-        });
-	});
+	const total = arrs.reduce((acc, currRow) => {
+	    return acc + currRow.reduce((rowItemSum, item) => rowItemSum + item, 0);
+	}, 0);
 	return total;
 };
 

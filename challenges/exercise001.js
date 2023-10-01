@@ -26,7 +26,7 @@ export function addVAT(originalPrice, vatRate) {
 	if (originalPrice === undefined || typeof originalPrice !== 'number'
         || isNaN(originalPrice) || originalPrice < 0)
         throw new Error('originalPrice is required and should be a valid number'
-        +'greater than 0');
+        +' greater than 0');
 	if (vatRate === undefined || typeof vatRate !== 'number' || isNaN(vatRate) || vatRate < 0)
         throw new Error('vatRate is required and should be a valid number greater than 0');
 	let vatAdded = originalPrice + (originalPrice * vatRate / 100);

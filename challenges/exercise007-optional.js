@@ -26,12 +26,22 @@ export const sumDigits = (n) => {
  * @param {Number} step
  */
 export const createRange = (start, end, step) => {
-	if (start === undefined) throw new Error('start is required');
-	if (end === undefined) throw new Error('end is required');
-	if (step === undefined)
-		console.log(
-			"FYI: Optional step parameter not provided. Remove this check once you've handled the optional step!"
-		);
+	if (start === undefined || typeof start != 'number' || start < 0)
+	    throw new Error('start is required and must be positive');
+	if (end === undefined || typeof end != 'number' || end < 0)
+	    throw new Error('end is required and must be positive');
+	if (step === undefined || typeof step != 'number' || step <= 0)
+		throw new Error('step is required and must be positive');
+
+    let rangeArray = [];
+    if (step > 0 && start < end) {
+        for(let i = start; i <= end; i += step){
+            rangeArray.push(i);
+        }
+    }else {
+        throw new Error('Invalid inputs provided, start has to be lesser than end')
+    }
+    return rangeArray;
 };
 
 /**

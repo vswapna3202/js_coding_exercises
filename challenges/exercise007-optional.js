@@ -7,7 +7,14 @@
  * @param {Number} n
  */
 export const sumDigits = (n) => {
-	if (n === undefined) throw new Error('n is required');
+	if (n === undefined || typeof n !== 'number' || n < 0)
+	   throw new Error('n is required');
+	var sum = 0;
+	while (n > 0) {
+	    sum += n % 10;
+	    n = Math.floor(n / 10);
+	}
+	return sum;
 };
 
 /**

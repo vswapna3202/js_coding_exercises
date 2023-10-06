@@ -8,11 +8,11 @@
  */
 export const sumDigits = (n) => {
 	if (n === undefined || typeof n !== 'number' || n < 0)
-	   throw new Error('n is required');
+        throw new Error('n is required');
 	var sum = 0;
 	while (n > 0) {
-	    sum += n % 10;
-	    n = Math.floor(n / 10);
+        sum += n % 10;
+        n = Math.floor(n / 10);
 	}
 	return sum;
 };
@@ -27,9 +27,11 @@ export const sumDigits = (n) => {
  */
 export const createRange = (start, end, step) => {
 	if (start === undefined || typeof start != 'number' || start < 0)
-	    throw new Error('start is required and must be positive');
+        throw new Error('start is required and must be positive');
+
 	if (end === undefined || typeof end != 'number' || end < 0)
-	    throw new Error('end is required and must be positive');
+        throw new Error('end is required and must be positive');
+
 	if (step === undefined || typeof step != 'number' || step <= 0)
 		throw new Error('step is required and must be positive');
 
@@ -75,21 +77,21 @@ export const createRange = (start, end, step) => {
  */
 export const getScreentimeAlertList = (users, date) => {
     var datePattern = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
-	if (users === undefined) throw new Error('users is required');
-	if (date === undefined || !date.match(datePattern)){
-	    throw new Error('date is required and in format');
+	if (users === undefined || users === "") throw new Error('users is required');
+	if (date === undefined || date === "" || !date.match(datePattern)){
+        throw new Error('date is required and in format YYYY-MM-DD');
 	}
 
 	const alertUsers = [];
 	users.forEach((user) => {
-	    user.screenTime.forEach((usage) => {
+        user.screenTime.forEach((usage) => {
             if (usage.date == date){
                 let totalUsage = Object.values(usage.usage).reduce((acc,curr) => acc + curr, 0);
                 if (totalUsage > 100){
                     alertUsers.push(user.username);
                 }
             }
-	    });
+        });
 	});
     return alertUsers;
 };
@@ -105,9 +107,23 @@ export const getScreentimeAlertList = (users, date) => {
  * @param {String} str
  */
 export const hexToRGB = (hexStr) => {
-	if (hexStr === undefined) throw new Error('hexStr is required');
+    const isValidHex = (hexStr) => /^[0-9A-Fa-f]{6}$/.test(hexStr);
+	if (hexStr === undefined || typeof hexStr != 'string' || !isValidHex(hexStr))
+        throw new Error('hexStr is required and must be a valid hexadecimal string');
+	let strR = hexStr.substring(0,2);
+	let strG = hexStr.substring(2,4);
+	let strB = hexStr.substring(4,6);
+	let rDecimal = hexaToDecimalConverter(strR);
+	let gDecimal = hexaToDecimalConverter(strG);
+	let bDecimal = hexaToDecimalConverter(strB);
+	return `rgb(${rDecimal},${gDecimal},${bDecimal})`;
 };
 
+const hexaToDecimalConverter = (hex) => {
+    if (hex !== undefined){
+        return parseInt(hex, 16);
+    }
+}
 /**
  * This function takes a noughts and crosses board represented as an array, where an empty space is represented with null.
  * [
@@ -120,4 +136,28 @@ export const hexToRGB = (hexStr) => {
  */
 export const findWinner = (board) => {
 	if (board === undefined) throw new Error('board is required');
+
+	let i = 0;
+	let j = 0;
+	//check for two diagonals if any true then return back any element value
+	if(board[i][j] === board[i+1][j+1] && board[i][j] === board[i+2][j+2])
+        return board[i][j];
+	if(board[i][j+2] === board[i+1][j+1] && board[i][j+2] === board[i+2][j])
+        return board[i][j+2];
+
+    //check for rows if any true then return back any element value
+    j = 0;
+    for(i = 0; i < 3; i++){
+        if(board[i][j] === board[i][j+1] && board[i][j] === board[i][j+2])
+            return board[i][j];
+    }
+
+    //check for columns if any true then return back any element value
+    i = 0;
+    for (j = 0; j < 3; j++){
+        if(board[i][j] === board[i+1][j] && board[i][j] === board[i+2][j])
+            return board[i][j];
+    }
+    return null;
+
 };

@@ -74,8 +74,24 @@ export const createRange = (start, end, step) => {
  * @param {Array} users
  */
 export const getScreentimeAlertList = (users, date) => {
+    var datePattern = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
 	if (users === undefined) throw new Error('users is required');
-	if (date === undefined) throw new Error('date is required');
+	if (date === undefined || !date.match(datePattern)){
+	    throw new Error('date is required and in format');
+	}
+
+	const alertUsers = [];
+	users.forEach((user) => {
+	    user.screenTime.forEach((usage) => {
+            if (usage.date == date){
+                let totalUsage = Object.values(usage.usage).reduce((acc,curr) => acc + curr, 0);
+                if (totalUsage > 100){
+                    alertUsers.push(user.username);
+                }
+            }
+	    });
+	});
+    return alertUsers;
 };
 
 /**

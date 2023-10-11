@@ -30,8 +30,8 @@ export function getTotalSubjects(people) {
 export function checkIngredients(menu, ingredient) {
 	if (menu === undefined) throw new Error('menu is required');
 	if (!ingredient) throw new Error('ingredient is required');
-	for (const m of menu){
-        if(m.ingredients.includes(ingredient)){
+	for (const menuItem of menu){
+        if(menuItem.ingredients.includes(ingredient)){
             return true;
         }
 	}
@@ -41,7 +41,7 @@ export function checkIngredients(menu, ingredient) {
 export function duplicateNumbers(arr1, arr2) {
 	if (arr1 === undefined) throw new Error('arr1 is required');
 	if (arr2 === undefined) throw new Error('arr2 is required');
-	let duplicateArray = [];
+	const duplicateArray = [];
 
     arr1.forEach((item) => {
         if (arr2.includes(item) && !duplicateArray.includes(item)){

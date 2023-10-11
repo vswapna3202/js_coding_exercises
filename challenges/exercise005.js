@@ -36,8 +36,12 @@ export const sumArrays = (arrs) => {
 
 export const arrShift = (arr) => {
 	if (arr === undefined) throw new Error('arr is required');
+
 	if (arr.length < 2) return arr;
-	[arr[0],arr[arr.length - 1]] = [arr[arr.length - 1], arr[0]];
+	const firstElement = arr.shift();
+	const lastElement = arr.pop();
+	arr.unshift(lastElement);
+	arr.push(firstElement);
 	return arr;
 };
 
@@ -52,15 +56,6 @@ export const findNeedle = (haystack, searchTerm) => {
 
 export const getWordFrequencies = (str) => {
 	if (str === undefined) throw new Error('str is required');
-	const strArray = str.split(' ');
-	const frequencies = {};
-	strArray.forEach(word => {
-        const cleanedWord = word.replace(/[^\w\s]/g, '').toLowerCase();
-        if(frequencies[cleanedWord] === undefined){
-            frequencies[cleanedWord] = 1;
-        }else{
-            frequencies[cleanedWord] += 1;
-        }
-	});
-	return frequencies;
+	const words = str.toLowerCase().match(/\w+/g) || [];
+	return words.reduce((frequencies, word) => {frequencies[word] = (frequencies[word] || 0) + 1; return frequencies},{});
 };

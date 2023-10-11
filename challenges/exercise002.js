@@ -13,7 +13,7 @@ export function isFromManchester(person) {
 
 export function getBusNumbers(people) {
 	if (people === undefined) throw new Error('people is required');
-	if (typeof people !== 'number' || isNaN(people) || people < 0)
+	if (typeof people !== 'number' || people < 0)
         throw new Error ('people needs to be a number');
 	const capacity = 40;
 	const buses = people / capacity;

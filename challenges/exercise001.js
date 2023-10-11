@@ -24,27 +24,27 @@ export function generateInitials(firstName, lastName) {
 
 export function addVAT(originalPrice, vatRate) {
 	if (originalPrice === undefined || typeof originalPrice !== 'number'
-        || isNaN(originalPrice) || originalPrice < 0)
+         || originalPrice < 0)
         throw new Error('originalPrice is required and should be a valid number'
         +' greater than 0');
-	if (vatRate === undefined || typeof vatRate !== 'number' || isNaN(vatRate) || vatRate < 0)
+	if (vatRate === undefined ||  isNaN(vatRate) || vatRate < 0)
         throw new Error('vatRate is required and should be a valid number greater than 0');
-	let vatAdded = originalPrice + (originalPrice * vatRate / 100);
+	const vatAdded = originalPrice + (originalPrice * vatRate / 100);
 	return Math.abs(vatAdded % 1) !== 0 ? parseFloat(vatAdded.toFixed(2)) : vatAdded;
 }
 
 export function getSalePrice(originalPrice, reduction) {
 	if (originalPrice === undefined || typeof originalPrice !== 'number'
-        || isNaN(originalPrice) || originalPrice < 0)
+        || originalPrice < 0)
 		throw new Error('originalPrice is required and must be a positive number');
-	if (reduction === undefined || typeof reduction !== 'number' || isNaN(reduction) || reduction < 0)
+	if (reduction === undefined || typeof reduction !== 'number' || reduction < 0)
         throw new Error('reduction is required and must be a positive number');
-    let salePrice = originalPrice - (originalPrice * reduction / 100);
+    const salePrice = originalPrice - (originalPrice * reduction / 100);
     return Math.abs(salePrice % 1) !== 0 ? parseFloat(salePrice.toFixed(2)) : salePrice;
 }
 
 export function getMiddleCharacter(str) {
-	if (!str || typeof str != 'string')
+	if (!str || typeof str !== 'string')
         throw new Error('str is required and must be a string');
 
     const middleIndex = str.length / 2;
@@ -54,7 +54,7 @@ export function getMiddleCharacter(str) {
 }
 
 export function reverseWord(word) {
-	if (!word || typeof word != 'string')
+	if (!word || typeof word !== 'string')
         throw new Error('word is required and should be a string');
 	return word.split('').reverse().join('');
 }
@@ -83,7 +83,7 @@ export function getMeanScore(scores) {
 }
 
 export function simpleFizzBuzz(n) {
-	if (n === undefined || typeof n !== 'number' || isNaN(n))
+	if (n === undefined || isNaN(n))
         throw new Error('n is required and must be a number');
 	if (n%3 === 0 && n%5 === 0) return "fizzbuzz";
 	else if (n % 3 === 0) return "fizz";

@@ -6,7 +6,8 @@ export function findSmallNums(nums) {
 export function findNamesBeginningWith(names, char) {
 	if (!names) throw new Error('names is required');
 	if (!char) throw new Error('char is required');
-	return names.filter((item) => (item.charAt(0) === char));
+
+	return names.filter((item) => (item.startsWith(char)));
 }
 
 export function findVerbs(words) {
@@ -38,9 +39,8 @@ export function getSquareRoots(nums) {
 export function findSentencesContaining(sentences, str) {
 	if (!sentences) throw new Error('sentences is required');
 	if (!str) throw new Error('str is required');
-	str = str.toLowerCase();
-	const matchingSentence = sentences.filter((sentence) =>
-        sentence.toLowerCase().includes(str));
+	const target = new RegExp(`${str}`, 'i')
+	const matchingSentence = sentences.filter((sentence) => target.test(sentence));
 	return matchingSentence;
 }
 

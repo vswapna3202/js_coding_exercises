@@ -17,7 +17,7 @@ export const sumMultiples = (arr) => {
     }
 	let sum = 0;
 	arr.forEach((num) => {
-        if (num === undefined || typeof num !== 'number' || isNaN(num))
+        if (num === undefined || typeof num !== 'number')
             throw new Error('number is required');
         if((num % 3 === 0) || (num%5 === 0)){
             sum += num;
@@ -63,7 +63,7 @@ export const getComplementaryDNA = (str) => {
  * @returns {Boolean}
  */
 export const isItPrime = (n) => {
-	if (n === undefined || n <= 1 || isNaN(n) || typeof n !== 'number')
+	if (n === undefined || n <= 1 || typeof n !== 'number')
         throw new Error('n is required and should be greater than 1');
 
     for(let i = 2; i <= Math.sqrt(n) ; i++){
@@ -86,7 +86,7 @@ export const isItPrime = (n) => {
  * @returns {Array}
  */
 export const createMatrix = (n, fill) => {
-	if (n === undefined || typeof n !== 'number' || isNaN(n) || n < 1)
+	if (n === undefined || typeof n !== 'number' || n < 1)
         throw new Error('n is required and should be a number > 1');
 	if (fill === undefined || fill.length === 0)
         throw new Error('fill is required and should be a string');
@@ -116,7 +116,7 @@ export const createMatrix = (n, fill) => {
 export const areWeCovered = (staff, day) => {
 	if (staff === undefined || staff.length === 0)
         throw new Error('staff is required');
-	if (day === undefined || typeof day !== 'string' || !isNaN(day))
+	if (day === undefined || typeof day !== 'string')
         throw new Error('day is required');
 	let staffCount = 0;
 	staff.forEach((staffName => {

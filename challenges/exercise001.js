@@ -70,7 +70,8 @@ export function reverseAllWords(words) {
 export function countLinuxUsers(users) {
 	if (users === undefined || users.length === 0 || !Array.isArray(users))
         throw new Error('users is required');
-	const linuxUsers = users.filter(user => user.type === 'Linux');
+    const USER_TYPE = 'Linux';
+	const linuxUsers = users.filter(user => user.type === USER_TYPE);
 	return linuxUsers.length;
 }
 
@@ -85,8 +86,10 @@ export function getMeanScore(scores) {
 export function simpleFizzBuzz(n) {
 	if (n === undefined || isNaN(n))
         throw new Error('n is required and must be a number');
-	if (n%3 === 0 && n%5 === 0) return "fizzbuzz";
-	else if (n % 3 === 0) return "fizz";
-	else if (n % 5 === 0) return "buzz";
+    const FIZZ = "fizz";
+    const BUZZ = "buzz";
+	if (n%3 === 0 && n%5 === 0) return FIZZ+BUZZ;
+	else if (n % 3 === 0) return FIZZ;
+	else if (n % 5 === 0) return BUZZ;
 	else return n;
 }
